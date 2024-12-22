@@ -1,0 +1,25 @@
+﻿@using CW17.Models.Entity;
+@model List<Product>
+<table class="table table-bordered table-responsive table-primary table-hover">
+	<thead>
+		<tr>
+			<th>شناسه</th>
+			<th>نام محصول </th>
+			<th>قیمت</th>
+			<th>توضیحات</th>
+			<th>دسته بندی</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var item in @Model)
+		{
+			<tr>
+				<td>@item.Id</td>
+				<td>@item.ProductName</td>
+				<td>@item.Pric</td>
+				<td>@item.Description</td>
+				<td>@item.Category?.CategoryName</td>
+			</tr>
+		}
+	</tbody>
+</table>
