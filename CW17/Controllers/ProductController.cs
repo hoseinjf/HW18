@@ -1,6 +1,7 @@
 ﻿using CW17.Models.Entity;
 using CW17.Models.Servise;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace CW17.Controllers
 {
@@ -14,11 +15,16 @@ namespace CW17.Controllers
             if (UserController.OnUser != null)
             {
                 var pro = productServise.Get();
+                productServise.GetCategory();
+                ViewBag.Categories = new SelectList(productServise.GetCategory(), "Id", "CategoryName");
+
                 return View(pro);
             }
             return RedirectToAction("index", "Home");
         }
-        public IActionResult Add(string name, double proc, string description,string username,string password)
+
+        [HttpPost]
+        public IActionResult Add(string name, double pric, string description,int categoryId,string username,string password)
         {
             if (UserController.OnUser != null)
             {
@@ -26,8 +32,9 @@ namespace CW17.Controllers
                 {
                     ProductName = name,
                     Description = description,
-                    Pric = proc
-                };
+                    Pric = pric,
+                    CategoryId = categoryId,
+				};
                 productServise.Add(product);
                 return RedirectToAction("index");
             }

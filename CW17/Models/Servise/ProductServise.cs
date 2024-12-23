@@ -15,6 +15,11 @@ namespace CW17.Models.Servise
             var c = repository.Get();
             return c;
         }
+        public List<Category> GetCategory()
+        {
+            var c = repository.GetCategory();
+            return c;
+        }
         public void Add(Product product) 
         {
             repository.Add(product);

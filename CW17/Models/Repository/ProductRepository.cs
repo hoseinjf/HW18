@@ -1,5 +1,6 @@
 ﻿using CW17.Models.DB;
 using CW17.Models.Entity;
+using Microsoft.EntityFrameworkCore;
 
 namespace CW17.Models.Repository
 {
@@ -13,7 +14,12 @@ namespace CW17.Models.Repository
         }
         public List<Product> Get()
         {
-            var c = _context.Products.ToList();
+            var c = _context.Products.Include(p=> p.Category).ToList();
+            return c;
+        }
+        public List<Category> GetCategory()
+        {
+            var c = _context.Categories.ToList();
             return c;
         }
         public void Add(Product product)
@@ -23,6 +29,7 @@ namespace CW17.Models.Repository
                 ProductName = product.ProductName,
                 Pric = product.Pric,
                 Description = product.Description,
+                CategoryId = product.CategoryId,
 
             };
             _context.Products.Add(product1);
