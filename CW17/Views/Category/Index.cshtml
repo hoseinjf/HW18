@@ -1,52 +1,62 @@
 ﻿@using CW17.Models.Entity;
-@model List<Category>
+@model List<Category>;
 
 <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal">
-	Add Category
+    Add Category
 </button>
-<br /><br />
+<br />
+<br />
 <div class="modal" tabindex="-1" id="modal">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<form asp-action="Add">
-				<div class="modal-body">
-					<label id="name" name="name">
-						نام محصول
-					</label>
-					<input type="text" id="name" name="name" />
-					<br /><br />
-					<label id="description" name="description">
-						توضیحات
-					</label>
-					<input type="text" id="description" name="description" />
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form asp-action="Add">
+                <div class="modal-body">
+                    <label id="name" name="name">
+                        نام دسته بندی
+                    </label>
+                    <input type="text" id="name" name="name" />
+                    <br /><br />
+                    <label id="description" name="description">
+                        توضیحات
+                    </label>
+                    <input type="text" id="description" name="description" />
 
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-					<button type="submit" class="btn btn-primary">Save</button>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
 
-				</div>
-			</form>
-		</div>
-	</div>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
 
+
+
+
+
 <table class="table table-bordered table-responsive table-primary table-hover">
-	<thead>
-		<tr>
-			<th>شناسه</th>
-			<th>نام دسته بندی </th>
-			<th>توضیحات</th>
-		</tr>
-	</thead>
-	<tbody>
-		@foreach (var item in @Model)
-		{
-			<tr>
-				<td>@item.Id</td>
-				<td>@item.CategoryName</td>
-				<td>@item.Description</td>
-			</tr>
-		}
-	</tbody>
+    <thead>
+        <tr>
+            <th>شناسه</th>
+            <th>نام دسته بندی </th>
+            <th>توضیحات</th>
+            <th>عملیات</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in @Model)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.CategoryName</td>
+                <td>@item.Description</td>
+                <td>
+                    <a class="btn btn-warning" asp-controller="Category" asp-action="Update" asp-route-id="@item.Id">Update</a>
+                    <a class="btn btn-danger" asp-controller="Category" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
 </table>

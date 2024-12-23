@@ -19,13 +19,17 @@ namespace CW17.Models.Servise
         {
             repository.Add(product);
         }
-        public void Update(int id) 
+        public void Update(int id, string name, string description, double pric)
         {
-            repository.Update(id);
+            repository.Update(id,name,description,pric);
         }
         public void Delete(int id) 
         {
             repository.Delete(id);
+        }
+        public Product Show(int id) 
+        {
+            return repository.Show(id);
         }
 
     }

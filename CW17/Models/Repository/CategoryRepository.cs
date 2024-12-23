@@ -27,29 +27,23 @@ namespace CW17.Models.Repository
             _context.Categories.Add(category1);
             _context.SaveChanges();
         }
-		public Category Show(int id)
-		{
-			var car = _context.Categories.FirstOrDefault(x => x.Id == id);
-			Category category = new Category()
-			{
-				CategoryName = car.CategoryName,
-				Description = car.Description,
-				Products = car.Products,
-			};
-			return category;
-		}
-		public Category Update(int id) 
+        public Category Show(int id)
         {
-            var c = _context.Categories.FirstOrDefault(c => c.Id == id);
-            var category = new Category() {
-                CategoryName=c.CategoryName,
-                Description=c.Description,
-                Products=c.Products,
-            };
-            _context.SaveChanges();
-            return category;
+            var car = _context.Categories.FirstOrDefault(x => x.Id == id);
+
+            return car;
         }
-        public void Delete(int id) 
+        public Category Update(int id, string name, string description)
+        {
+            var c = _context.Categories.FirstOrDefault(x => x.Id == id);
+
+            c.Id=id;
+            c.CategoryName=name;
+            c.Description=description;
+            _context.SaveChanges();
+            return c;
+        }
+        public void Delete(int id)
         {
             var c = _context.Categories.FirstOrDefault(c => c.Id == id);
             _context.Categories.Remove(c);

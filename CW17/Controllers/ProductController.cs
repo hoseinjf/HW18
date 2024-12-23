@@ -32,7 +32,45 @@ namespace CW17.Controllers
                 return RedirectToAction("index");
             }
             return RedirectToAction("index", "Home");
+        }
+
+
+
+        [HttpGet]
+        public IActionResult Update(int id)
+        {
+            if (UserController.OnUser != null)
+            {
+                var product = productServise.Show(id);
+                return View(product);
+            }
+            return RedirectToAction("index", "Home");
 
         }
+
+        [HttpPost]
+        public IActionResult UpdateProduct(int id, string name, string description,double pric)
+        {
+            if (UserController.OnUser != null)
+            {
+                productServise.Update(id, name, description,pric);
+                return RedirectToAction("index");
+            }
+            return RedirectToAction("index", "Home");
+        }
+
+
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            if (UserController.OnUser != null)
+            {
+                productServise.Delete(id);
+                return RedirectToAction("index");
+            }
+            return RedirectToAction("index", "Home");
+        }
+
+
     }
 }

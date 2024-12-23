@@ -20,9 +20,9 @@ namespace CW17.Models.Servise
         {
             _category.Add(category);
         }
-        public void Update(int id) 
+        public Category Update(int id, string name, string description) 
         {
-            _category.Update(id);
+            return _category.Update( id,  name,  description);
         }
         public void Delete(int id) 
         {

@@ -29,7 +29,41 @@ namespace CW17.Controllers
                 return RedirectToAction("index");
             }
             return RedirectToAction("index", "Home");
-            
+        }
+
+        [HttpGet]
+        public IActionResult Update(int id) 
+        {
+            if (UserController.OnUser != null)
+            {
+                var category = categoryServise.Show(id);
+                return View(category);
+            }
+            return RedirectToAction("index", "Home");
+
+        }
+
+        [HttpPost]
+        public IActionResult UpdateCategory(int id, string name, string description)
+        {
+            if (UserController.OnUser != null)
+            {
+                categoryServise.Update(id,name,description);
+                return RedirectToAction("index");
+            }
+            return RedirectToAction("index", "Home");
+        }
+
+
+        [HttpGet]
+        public IActionResult Delete(int id) 
+        {
+            if (UserController.OnUser != null)
+            {
+                categoryServise.Delete(id);
+                return RedirectToAction("index");
+            }
+            return RedirectToAction("index", "Home");
         }
     }
 }

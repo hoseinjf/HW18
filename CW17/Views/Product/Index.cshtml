@@ -1,5 +1,45 @@
 ﻿@using CW17.Models.Entity;
 @model List<Product>
+
+
+
+
+<button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal">
+	Add Product
+</button>
+<br />
+<br />
+<div class="modal" tabindex="-1" id="modal">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<form asp-action="Add">
+				<div class="modal-body">
+					<label id="name" name="name">
+						نام محصول
+					</label>
+					<input type="text" id="name" name="name" />
+					<br /><br />
+					<label id="pric" name="pric">
+						قیمت
+					</label>
+					<input type="text" id="pric" name="pric" />
+					<br /><br />
+					<label id="description" name="description">
+						توضیحات
+					</label>
+					<input type="text" id="description" name="description" />
+
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-primary">Save</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+
 <table class="table table-bordered table-responsive table-primary table-hover">
 	<thead>
 		<tr>
@@ -8,6 +48,7 @@
 			<th>قیمت</th>
 			<th>توضیحات</th>
 			<th>دسته بندی</th>
+			<th>عملیات</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -19,6 +60,10 @@
 				<td>@item.Pric</td>
 				<td>@item.Description</td>
 				<td>@item.Category?.CategoryName</td>
+				<td>
+					<a class="btn btn-warning" asp-controller="Product" asp-action="Update" asp-route-id="@item.Id">Update</a>
+					<a class="btn btn-danger" asp-controller="Product" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+				</td>
 			</tr>
 		}
 	</tbody>

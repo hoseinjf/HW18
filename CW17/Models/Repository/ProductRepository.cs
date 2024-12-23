@@ -21,28 +21,29 @@ namespace CW17.Models.Repository
             var product1 = new Product()
             {
                 ProductName = product.ProductName,
-                Pric=product.Pric,
-                Description=product.Description,
-                CategoryId=product.CategoryId,
+                Pric = product.Pric,
+                Description = product.Description,
 
             };
             _context.Products.Add(product1);
             _context.SaveChanges();
         }
 
-        public Product Update(int id)
+        public Product Show(int id)
+        {
+            var pro = _context.Products.FirstOrDefault(x => x.Id == id);
+            return pro;
+        }
+
+        public Product Update(int id, string name, string description, double pric)
         {
             var c = _context.Products.FirstOrDefault(c => c.Id == id);
-            var product1 = new Product()
-            {
-                ProductName = c.ProductName,
-                Pric = c.Pric,
-                Description = c.Description,
-                Category = c.Category,
-                CategoryId = c.CategoryId,
-            };
+            c.Id = id;
+            c.ProductName = name;
+            c.Pric = pric;
+            c.Description = description;
             _context.SaveChanges();
-            return product1;
+            return c;
         }
         public void Delete(int id)
         {
